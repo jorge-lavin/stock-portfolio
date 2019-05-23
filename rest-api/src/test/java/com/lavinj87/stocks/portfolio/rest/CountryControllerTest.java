@@ -63,7 +63,7 @@ public class CountryControllerTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        String expected = "{\"countryId\":\"ES\",\"name\":\"Spain_foo\"}";
+        String expected = "{\"countryId\":\"ES\",\"name\":\"Spain\"}";
 
         Assert.assertEquals(expected, actual);
     }
