@@ -1,5 +1,8 @@
 Stock Portfolio
 ===============
+
+[![Build Status](https://travis-ci.com/lavinj87/stock-portfolio.svg?token=V6sBzqxR9xgRNA3FpMco&branch=develop)](https://travis-ci.com/lavinj87/stock-portfolio)
+
 This project let's you define a `Portfolio` consisting on `Stocks`.
 
 
