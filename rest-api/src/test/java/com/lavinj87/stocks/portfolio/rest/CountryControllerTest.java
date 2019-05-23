@@ -56,14 +56,14 @@ public class CountryControllerTest {
     public void whenValidInput_ThenReturnsCountry() throws Exception {
         when(countryRepository.save(es)).thenReturn(es);
 
-        String expected = mockMvc.perform(post("/countries/{countryId}", "ES")
+        String actual = mockMvc.perform(post("/countries/{countryId}/", "ES")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(es)))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        String actual = objectMapper.writeValueAsString(es);
+        String expected = "{\"countryId\":\"ES\",\"name\":\"Spain\"}";
 
         Assert.assertEquals(expected, actual);
     }
