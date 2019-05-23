@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Dividend]
 (
-	[StockId]    VARCHAR(50)  NOT NULL,
+	[StockId]    VARCHAR(16)  NOT NULL,
 	[Date]       DATE         NOT NULL,
 	[Period]     SMALLINT     NOT NULL,
 	[Amount]     DECIMAL(5,4) NOT NULL,

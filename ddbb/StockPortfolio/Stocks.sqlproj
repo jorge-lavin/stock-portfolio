@@ -69,9 +69,8 @@
     <None Include="PostDeployment\BME-VIS.sql" />
     <Build Include="DividendByPeriod.sql" />
     <Build Include="Portfolio.sql" />
-    <Build Include="TransactionLog.sql" />
-    <Build Include="OrderType.sql" />
     <Build Include="GetLastPeriodDividendsByPortfolio.sql" />
+    <Build Include="StockOrder.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

@@ -10,15 +10,9 @@ Plantilla de script posterior a la implementación
 --------------------------------------------------------------------------------------
 */
 
-IF NOT(EXISTS(SELECT TOP 1 * FROM OrderType))
-BEGIN
-	INSERT INTO OrderType VALUES(1, 'Buy')
-	INSERT INTO OrderType VALUES(2, 'Sell')
-END
-
 
 BEGIN TRAN
-	DELETE FROM OrderLog
+	DELETE FROM StockOrder
 	DELETE FROM Portfolio
 	DELETE FROM Dividend
 	DELETE FROM Stock

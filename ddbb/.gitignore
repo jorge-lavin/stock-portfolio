@@ -17,3 +17,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+# Gradle
+.gradle
+/build/
+

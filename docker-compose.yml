@@ -1,0 +1,9 @@
+version: '2.1'
+services:
+  sql-server:
+    image: microsoft/mssql-server-linux:2017-CU12
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Password.2018

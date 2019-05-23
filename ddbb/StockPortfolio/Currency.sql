@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Currency]
 (
 	[CurrencyId]  VARCHAR(3)  PRIMARY KEY  NOT NULL,
-	[Name]        NVARCHAR(50) NOT NULL
+	[Name]        NVARCHAR(64) NOT NULL
 )
 
 GO

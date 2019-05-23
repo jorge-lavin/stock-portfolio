@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Stock]
 (
-	[StockId]   VARCHAR(50) NOT NULL PRIMARY KEY,
+	[StockId]   VARCHAR(16) NOT NULL PRIMARY KEY,
  	[SectorId]  INT         NOT NULL, 
 	[CountryId] VARCHAR(2)  NOT NULL,
     CONSTRAINT [FK_Stock_Sector]  FOREIGN KEY ([SectorId])  REFERENCES [Sector]([SectorId]),

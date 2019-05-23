@@ -1,4 +1,7 @@
-Este proyecto consiste en una base de datos de datos historicos de empresas.
+Stock Portfolio
+===============
+
+This project let's you define a `Portfolio` consisting on `Stocks` with a focus on `Dividends`. A `Portfolio` consists on a log of `StockOders`
 
 Se proveen las siguientes entidades:
 

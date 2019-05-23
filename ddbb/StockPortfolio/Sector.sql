@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Sector]
 (
 	[SectorId] INT NOT NULL PRIMARY KEY,
-	[Name]     VARCHAR(100) NOT NULL
+	[Name]     VARCHAR(64) NOT NULL
 )
 
 GO
