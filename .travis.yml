@@ -12,11 +12,11 @@ git:
 
 before_install:
   - cd rest-api 
-
-install: 
-  - gradle wrapper --gradle-version 5.4.1
-  - gradle assemble
-  - gradle check  
+  - wget http://services.gradle.org/distributions/gradle-5.3-bin.zip
+  - unzip -qq gradle-5.3-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-5.3
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - gradle -v
 
 # cache the build tool's caches
 # cache:
