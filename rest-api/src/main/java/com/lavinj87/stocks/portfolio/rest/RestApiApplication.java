@@ -1,9 +1,10 @@
-package com.lavinj87.stocks.portfolio.restapi;
+package com.lavinj87.stocks.portfolio.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication public class RestApiApplication {
+@SpringBootApplication
+public class RestApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestApiApplication.class, args);

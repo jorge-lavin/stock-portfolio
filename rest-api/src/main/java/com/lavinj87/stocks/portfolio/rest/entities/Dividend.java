@@ -1,11 +1,14 @@
-package com.lavinj87.stocks.portfolio.restapi.entities;
+package com.lavinj87.stocks.portfolio.rest.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @IdClass(DividendPK.class) public class Dividend
+@Entity @IdClass(DividendPK.class)
+public class Dividend
 {
 	private String stockId;
 	private Date date;
@@ -14,6 +17,15 @@ import java.util.Objects;
 	private String currencyId;
 	private Stock stockByStockId;
 	private Currency currencyByCurrencyId;
+
+	private Dividend() {}
+
+	public Dividend(Date date, short period, BigDecimal amount, String currencyId) {
+		this.date = date;
+		this.period = period;
+		this.amount	= amount;
+		this.currencyId = currencyId;
+	}
 
 	@Id @Column(name = "StockId", nullable = false, length = 16) public String getStockId()
 	{
@@ -82,7 +94,10 @@ import java.util.Objects;
 		return Objects.hash(stockId, date, period, amount, currencyId);
 	}
 
-	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false) public Stock getStockByStockId()
+	@ManyToOne
+	@JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false)
+	@JsonIgnore
+	public Stock getStockByStockId()
 	{
 		return stockByStockId;
 	}
@@ -92,7 +107,8 @@ import java.util.Objects;
 		this.stockByStockId = stockByStockId;
 	}
 
-	@ManyToOne @JoinColumn(name = "CurrencyId", referencedColumnName = "CurrencyId", nullable = false,  insertable = false, updatable = false) public Currency getCurrencyByCurrencyId()
+	@ManyToOne @JoinColumn(name = "CurrencyId", referencedColumnName = "CurrencyId", nullable = false,  insertable = false, updatable = false)
+	public Currency getCurrencyByCurrencyId()
 	{
 		return currencyByCurrencyId;
 	}

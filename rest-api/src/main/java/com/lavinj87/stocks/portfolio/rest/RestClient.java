@@ -1,12 +1,12 @@
-package com.lavinj87.stocks.portfolio.restapi;
+package com.lavinj87.stocks.portfolio.rest;
 
-import com.lavinj87.stocks.portfolio.restapi.entities.Country;
-import com.lavinj87.stocks.portfolio.restapi.entities.Currency;
-import com.lavinj87.stocks.portfolio.restapi.entities.Dividend;
-import com.lavinj87.stocks.portfolio.restapi.entities.Portfolio;
-import com.lavinj87.stocks.portfolio.restapi.entities.Sector;
-import com.lavinj87.stocks.portfolio.restapi.entities.Stock;
-import com.lavinj87.stocks.portfolio.restapi.entities.StockOrder;
+import com.lavinj87.stocks.portfolio.rest.entities.Country;
+import com.lavinj87.stocks.portfolio.rest.entities.Currency;
+import com.lavinj87.stocks.portfolio.rest.entities.Dividend;
+import com.lavinj87.stocks.portfolio.rest.entities.Portfolio;
+import com.lavinj87.stocks.portfolio.rest.entities.Sector;
+import com.lavinj87.stocks.portfolio.rest.entities.Stock;
+import com.lavinj87.stocks.portfolio.rest.entities.StockOrder;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
@@ -25,7 +25,7 @@ public class RestClient {
 	}
 
 	public RestClient(String host, Integer port) {
-		this("http;//" + host + ":" + port + "/", new RestTemplate());
+		this(String.format("http://%s:%d", host, port), new RestTemplate());
 	}
 
 	public List<Country> findCountries() {
@@ -64,7 +64,7 @@ public class RestClient {
 		return restTemplate.exchange(composeUrl("portfolios"), HttpMethod.GET, null, new ParameterizedTypeReference<List<Portfolio>>(){}).getBody();
 	}
 
-	public Portfolio findPortfolioById(String portfolioId) {
+	public Portfolio findPortfolioById(int portfolioId) {
 		return restTemplate.getForEntity(composeUrl("portfolios", String.valueOf(portfolioId)), Portfolio.class).getBody();
 	}
 
@@ -76,8 +76,8 @@ public class RestClient {
 		restTemplate.delete(composeUrl("portfolios", String.valueOf(portfolioId)));
 	}
 
-	public Portfolio addOrder(int portfolioId, StockOrder stockOrder) {
-		return restTemplate.postForObject(composeUrl("portfolios", String.valueOf(portfolioId), "stocks", stockOrder.getStockId()), stockOrder, Portfolio.class);
+	public Portfolio addOrder(int portfolioId, String stockId, StockOrder stockOrder) {
+		return restTemplate.postForObject(composeUrl("portfolios", String.valueOf(portfolioId), "stocks", stockId), stockOrder, Portfolio.class);
 	}
 
 	public List<Sector> findSectors() {
@@ -121,6 +121,6 @@ public class RestClient {
 		for (String part: parts) {
 			joiner.add(part);
 		}
-		return joiner.toString();
+		return joiner.toString() + "/";
 	}
 }

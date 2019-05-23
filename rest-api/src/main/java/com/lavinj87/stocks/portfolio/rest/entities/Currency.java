@@ -1,4 +1,6 @@
-package com.lavinj87.stocks.portfolio.restapi.entities;
+package com.lavinj87.stocks.portfolio.rest.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -10,6 +12,12 @@ import java.util.Objects;
 	private String name;
 	private Collection<Dividend> dividendsByCurrencyId;
 
+	private Currency() {}
+
+	public Currency(String currencyId, String name) {
+		this.currencyId = currencyId;
+		this.name = name;
+	}
 	@Id @Column(name = "CurrencyId", nullable = false, length = 3) public String getCurrencyId()
 	{
 		return currencyId;
@@ -46,7 +54,9 @@ import java.util.Objects;
 		return Objects.hash(currencyId, name);
 	}
 
-	@OneToMany(mappedBy = "currencyByCurrencyId") public Collection<Dividend> getDividendsByCurrencyId()
+	@OneToMany(mappedBy = "currencyByCurrencyId")
+	@JsonIgnore
+	public Collection<Dividend> getDividendsByCurrencyId()
 	{
 		return dividendsByCurrencyId;
 	}

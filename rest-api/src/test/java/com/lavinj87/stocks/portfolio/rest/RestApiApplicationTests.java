@@ -1,4 +1,4 @@
-package com.lavinj87.stocks.portfolio.restapi;
+package com.lavinj87.stocks.portfolio.rest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

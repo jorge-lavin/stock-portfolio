@@ -1,4 +1,6 @@
-package com.lavinj87.stocks.portfolio.restapi.entities;
+package com.lavinj87.stocks.portfolio.rest.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -13,6 +15,14 @@ import java.util.Objects;
 	private Sector sectorBySectorId;
 	private Country countryByCountryId;
 	private Collection<StockOrder> stockOrdersByStockId;
+
+	private Stock() {}
+
+	public Stock(String stockId, int sectorId, String countryId ) {
+		this.stockId = stockId;
+		this.sectorId = sectorId;
+		this.countryId = countryId;
+	}
 
 	@Id @Column(name = "StockId", nullable = false, length = 16) public String getStockId()
 	{
@@ -90,7 +100,9 @@ import java.util.Objects;
 		this.countryByCountryId = countryByCountryId;
 	}
 
-	@OneToMany(mappedBy = "stockByStockId") public Collection<StockOrder> getStockOrdersByStockId()
+	@OneToMany(mappedBy = "stockByStockId")
+	@JsonIgnore
+	public Collection<StockOrder> getStockOrdersByStockId()
 	{
 		return stockOrdersByStockId;
 	}

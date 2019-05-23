@@ -1,4 +1,4 @@
-package com.lavinj87.stocks.portfolio.restapi.entities;
+package com.lavinj87.stocks.portfolio.rest.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -9,6 +9,13 @@ import java.util.Objects;
 	private int portfolioId;
 	private String name;
 	private Collection<StockOrder> stockOrdersByPortfolioId;
+
+	private Portfolio() {}
+
+	public Portfolio(int portfolioId, String name) {
+		this.portfolioId = portfolioId;
+		this.name = name;
+	}
 
 	@Id @Column(name = "PortfolioId", nullable = false) public int getPortfolioId()
 	{

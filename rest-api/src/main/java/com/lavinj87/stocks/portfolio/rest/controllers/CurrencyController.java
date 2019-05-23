@@ -1,7 +1,7 @@
-package com.lavinj87.stocks.portfolio.restapi.controllers;
+package com.lavinj87.stocks.portfolio.rest.controllers;
 
-import com.lavinj87.stocks.portfolio.restapi.entities.Currency;
-import com.lavinj87.stocks.portfolio.restapi.repositories.CurrencyRepository;
+import com.lavinj87.stocks.portfolio.rest.entities.Currency;
+import com.lavinj87.stocks.portfolio.rest.repositories.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.lavinj87.stocks.portfolio.restapi.entities;
+package com.lavinj87.stocks.portfolio.rest.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

@@ -1,4 +1,6 @@
-package com.lavinj87.stocks.portfolio.restapi.entities;
+package com.lavinj87.stocks.portfolio.rest.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -12,6 +14,13 @@ import java.util.Objects;
 	private Date orderDate;
 	private Portfolio portfolioByPortfolioId;
 	private Stock stockByStockId;
+
+	private StockOrder() {}
+
+	public StockOrder(int amount, Date orderDate) {
+		this.amount = amount;
+		this.orderDate = orderDate;
+	}
 
 	@Id @Column(name = "PortfolioId", nullable = false) public int getPortfolioId()
 	{
@@ -70,7 +79,10 @@ import java.util.Objects;
 		return Objects.hash(portfolioId, stockId, amount, orderDate);
 	}
 
-	@ManyToOne @JoinColumn(name = "PortfolioId", referencedColumnName = "PortfolioId", nullable = false, insertable = false, updatable = false) public Portfolio getPortfolioByPortfolioId()
+	@ManyToOne
+	@JoinColumn(name = "PortfolioId", referencedColumnName = "PortfolioId", nullable = false, insertable = false, updatable = false)
+	@JsonIgnore
+	public Portfolio getPortfolioByPortfolioId()
 	{
 		return portfolioByPortfolioId;
 	}
@@ -80,7 +92,8 @@ import java.util.Objects;
 		this.portfolioByPortfolioId = portfolioByPortfolioId;
 	}
 
-	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false) public Stock getStockByStockId()
+	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false)
+	public Stock getStockByStockId()
 	{
 		return stockByStockId;
 	}

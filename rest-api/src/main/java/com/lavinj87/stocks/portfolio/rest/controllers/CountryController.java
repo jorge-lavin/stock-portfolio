@@ -1,7 +1,7 @@
-package com.lavinj87.stocks.portfolio.restapi.controllers;
+package com.lavinj87.stocks.portfolio.rest.controllers;
 
-import com.lavinj87.stocks.portfolio.restapi.entities.Country;
-import com.lavinj87.stocks.portfolio.restapi.repositories.CountryRepository;
+import com.lavinj87.stocks.portfolio.rest.entities.Country;
+import com.lavinj87.stocks.portfolio.rest.repositories.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collection;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;

@@ -1,11 +1,17 @@
-package com.lavinj87.stocks.portfolio.restapi.controllers;
+package com.lavinj87.stocks.portfolio.rest.controllers;
 
-import com.lavinj87.stocks.portfolio.restapi.entities.Dividend;
-import com.lavinj87.stocks.portfolio.restapi.entities.Stock;
-import com.lavinj87.stocks.portfolio.restapi.repositories.DividendRepository;
-import com.lavinj87.stocks.portfolio.restapi.repositories.StockRepository;
+import com.lavinj87.stocks.portfolio.rest.entities.Dividend;
+import com.lavinj87.stocks.portfolio.rest.entities.Stock;
+import com.lavinj87.stocks.portfolio.rest.repositories.DividendRepository;
+import com.lavinj87.stocks.portfolio.rest.repositories.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -48,12 +54,7 @@ public class StockController
 
 	@PostMapping("/{stockId}/dividends/")
 	public Dividend addDividend(@PathVariable String stockId, @RequestBody Dividend dividend) {
-		Stock stock = stockRepository.findById(stockId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find stock with id " + stockId));
-
-		dividend.setStockByStockId(stock);
-		stock.getDividendsByStockId().add(dividend);
-
-		stockRepository.save(stock);
+		dividend.setStockId(stockId);
 		return dividendRepository.save(dividend);
 	}
 }

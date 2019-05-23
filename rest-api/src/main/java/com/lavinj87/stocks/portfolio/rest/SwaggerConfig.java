@@ -1,4 +1,4 @@
-package com.lavinj87.stocks.portfolio.restapi;
+package com.lavinj87.stocks.portfolio.rest;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

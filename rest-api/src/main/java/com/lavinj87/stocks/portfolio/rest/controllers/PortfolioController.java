@@ -1,11 +1,12 @@
-package com.lavinj87.stocks.portfolio.restapi.controllers;
+package com.lavinj87.stocks.portfolio.rest.controllers;
 
 
-import com.lavinj87.stocks.portfolio.restapi.entities.Portfolio;
-import com.lavinj87.stocks.portfolio.restapi.entities.Stock;
-import com.lavinj87.stocks.portfolio.restapi.entities.StockOrder;
-import com.lavinj87.stocks.portfolio.restapi.repositories.PortfolioRepository;
-import com.lavinj87.stocks.portfolio.restapi.repositories.StockRepository;
+import com.lavinj87.stocks.portfolio.rest.entities.Portfolio;
+import com.lavinj87.stocks.portfolio.rest.entities.Stock;
+import com.lavinj87.stocks.portfolio.rest.entities.StockOrder;
+import com.lavinj87.stocks.portfolio.rest.repositories.PortfolioRepository;
+import com.lavinj87.stocks.portfolio.rest.repositories.StockOrderRepository;
+import com.lavinj87.stocks.portfolio.rest.repositories.StockRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,13 +26,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequestMapping("/portfolios/")
 public class PortfolioController {
 
-	private final PortfolioRepository portfolioRepository;
-	private final StockRepository     stockRepository;
+	private final PortfolioRepository  portfolioRepository;
+	private final StockOrderRepository stockOrderRepository;
 
 	@Autowired
-	public PortfolioController(PortfolioRepository portfolioRepository, StockRepository stockRepository) {
-		this.portfolioRepository = portfolioRepository;
-		this.stockRepository = stockRepository;
+	public PortfolioController(PortfolioRepository portfolioRepository, StockOrderRepository stockOrderRepository) {
+		this.portfolioRepository  = portfolioRepository;
+		this.stockOrderRepository = stockOrderRepository;
 	}
 
 	@GetMapping
@@ -55,18 +56,15 @@ public class PortfolioController {
 	}
 
 	@PostMapping("/{portfolioId}/stocks/{stockId}/")
-	public Portfolio addOrder(@PathVariable int portfolioId, @PathVariable String stockId, @RequestBody StockOrder stockOrder) {
-		Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find portfolio with id " + portfolioId));
-		Stock stock = stockRepository.findById(stockId).orElseThrow(() ->  new ResponseStatusException(NOT_FOUND, "Unable to find stock with id " + stockId));
+	public StockOrder addOrder(@PathVariable int portfolioId, @PathVariable String stockId, @RequestBody StockOrder stockOrder) {
+		//Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find portfolio with id " + portfolioId));
+		//Stock stock = stockRepository.findById(stockId).orElseThrow(() ->  new ResponseStatusException(NOT_FOUND, "Unable to find stock with id " + stockId));
 
-		stockOrder.setStockByStockId(stock);
-		stockOrder.setPortfolioByPortfolioId(portfolio);
+		stockOrder.setStockId(stockId);
+		stockOrder.setPortfolioId(portfolioId);
 
-		stock.getStockOrdersByStockId().add(stockOrder);
-		portfolio.getStockOrdersByPortfolioId().add(stockOrder);
-
-		stockRepository.save(stock);
-		return portfolioRepository.save(portfolio);
+		//stockRepository.save(stock);
+		return stockOrderRepository.save(stockOrder);
 	}
 
 }

@@ -1,4 +1,6 @@
-package com.lavinj87.stocks.portfolio.restapi.entities;
+package com.lavinj87.stocks.portfolio.rest.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -11,15 +13,14 @@ import java.util.Objects;
 	private Collection<Stock> stocksByCountryId;
 
 
+	private Country() { }
 
 	public Country(String countryId, String name) {
 		this.countryId = countryId;
 		this.name = name;
 	}
 
-	public Country()
-	{
-	}
+
 
 	@Id @Column(name = "CountryId", nullable = false, length = 2) public String getCountryId()
 	{
@@ -57,7 +58,9 @@ import java.util.Objects;
 		return Objects.hash(countryId, name);
 	}
 
-	@OneToMany(mappedBy = "countryByCountryId") public Collection<Stock> getStocksByCountryId()
+	@OneToMany(mappedBy = "countryByCountryId")
+	@JsonIgnore
+	public Collection<Stock> getStocksByCountryId()
 	{
 		return stocksByCountryId;
 	}
