@@ -11,7 +11,7 @@ git:
   depth: 3
 
 before_install:
-  - cd rest-api && gradle wrapper
+  - cd rest-api && gradle wrapper --gradle-version 5.4.1
 
 # cache the build tool's caches
 cache:
