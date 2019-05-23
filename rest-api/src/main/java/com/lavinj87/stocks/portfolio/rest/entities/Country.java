@@ -6,7 +6,8 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
-@Entity public class Country
+@Entity
+public class Country
 {
 	private String countryId;
 	private String name;
