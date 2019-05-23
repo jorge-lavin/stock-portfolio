@@ -1,4 +1,5 @@
 language: java
+
 # use Java 8
 jdk:
 - oraclejdk8
@@ -6,8 +7,19 @@ jdk:
 # see https://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure
 sudo: false
 
+git:
+  depth: 3
+
+before_install:
+  - cd rest-api 
+  - wget http://services.gradle.org/distributions/gradle-5.3-bin.zip
+  - unzip -qq gradle-5.3-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-5.3
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - gradle -v
+
 # cache the build tool's caches
 cache:
   directories:
-  - $HOME/.m2
-  - $HOME/.gradle
+   - $HOME/.m2
+   - $HOME/.gradle
