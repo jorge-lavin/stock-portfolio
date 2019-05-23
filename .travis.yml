@@ -19,7 +19,7 @@ install:
   - gradle check  
 
 # cache the build tool's caches
-cache:
-  directories:
-  - $HOME/.m2
-  - $HOME/.gradle
+# cache:
+        #  directories:
+        #  - $HOME/.m2
+        #  - $HOME/.gradle
