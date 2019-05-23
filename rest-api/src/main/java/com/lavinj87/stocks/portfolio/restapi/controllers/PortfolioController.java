@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
@@ -30,6 +32,11 @@ public class PortfolioController {
 	public PortfolioController(PortfolioRepository portfolioRepository, StockRepository stockRepository) {
 		this.portfolioRepository = portfolioRepository;
 		this.stockRepository = stockRepository;
+	}
+
+	@GetMapping
+	public List<Portfolio> findPortfolios() {
+		return portfolioRepository.findAll();
 	}
 
 	@GetMapping("/{portfolioId}")

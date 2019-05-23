@@ -10,6 +10,17 @@ import java.util.Objects;
 	private String name;
 	private Collection<Stock> stocksByCountryId;
 
+
+
+	public Country(String countryId, String name) {
+		this.countryId = countryId;
+		this.name = name;
+	}
+
+	public Country()
+	{
+	}
+
 	@Id @Column(name = "CountryId", nullable = false, length = 2) public String getCountryId()
 	{
 		return countryId;

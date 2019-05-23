@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
@@ -21,6 +23,11 @@ public class StockController
 	public StockController(StockRepository stockRepository, DividendRepository dividendRepository) {
 		this.stockRepository = stockRepository;
 		this.dividendRepository = dividendRepository;
+	}
+
+	@GetMapping
+	public List<Stock> findStocks() {
+		return stockRepository.findAll();
 	}
 
 	@GetMapping("/{stockId}")
