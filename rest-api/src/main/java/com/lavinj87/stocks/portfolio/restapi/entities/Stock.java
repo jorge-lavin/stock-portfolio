@@ -70,7 +70,7 @@ import java.util.Objects;
 		this.dividendsByStockId = dividendsByStockId;
 	}
 
-	@ManyToOne @JoinColumn(name = "SectorId", referencedColumnName = "SectorId", nullable = false) public Sector getSectorBySectorId()
+	@ManyToOne @JoinColumn(name = "SectorId", referencedColumnName = "SectorId", nullable = false,  insertable = false, updatable = false) public Sector getSectorBySectorId()
 	{
 		return sectorBySectorId;
 	}
@@ -80,7 +80,7 @@ import java.util.Objects;
 		this.sectorBySectorId = sectorBySectorId;
 	}
 
-	@ManyToOne @JoinColumn(name = "CountryId", referencedColumnName = "CountryId", nullable = false) public Country getCountryByCountryId()
+	@ManyToOne @JoinColumn(name = "CountryId", referencedColumnName = "CountryId", nullable = false,  insertable = false, updatable = false) public Country getCountryByCountryId()
 	{
 		return countryByCountryId;
 	}

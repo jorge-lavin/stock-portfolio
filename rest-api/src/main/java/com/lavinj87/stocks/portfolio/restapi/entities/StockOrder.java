@@ -70,7 +70,7 @@ import java.util.Objects;
 		return Objects.hash(portfolioId, stockId, amount, orderDate);
 	}
 
-	@ManyToOne @JoinColumn(name = "PortfolioId", referencedColumnName = "PortfolioId", nullable = false) public Portfolio getPortfolioByPortfolioId()
+	@ManyToOne @JoinColumn(name = "PortfolioId", referencedColumnName = "PortfolioId", nullable = false, insertable = false, updatable = false) public Portfolio getPortfolioByPortfolioId()
 	{
 		return portfolioByPortfolioId;
 	}
@@ -80,7 +80,7 @@ import java.util.Objects;
 		this.portfolioByPortfolioId = portfolioByPortfolioId;
 	}
 
-	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false) public Stock getStockByStockId()
+	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false) public Stock getStockByStockId()
 	{
 		return stockByStockId;
 	}

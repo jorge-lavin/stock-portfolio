@@ -82,7 +82,7 @@ import java.util.Objects;
 		return Objects.hash(stockId, date, period, amount, currencyId);
 	}
 
-	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false) public Stock getStockByStockId()
+	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false) public Stock getStockByStockId()
 	{
 		return stockByStockId;
 	}
@@ -92,7 +92,7 @@ import java.util.Objects;
 		this.stockByStockId = stockByStockId;
 	}
 
-	@ManyToOne @JoinColumn(name = "CurrencyId", referencedColumnName = "CurrencyId", nullable = false) public Currency getCurrencyByCurrencyId()
+	@ManyToOne @JoinColumn(name = "CurrencyId", referencedColumnName = "CurrencyId", nullable = false,  insertable = false, updatable = false) public Currency getCurrencyByCurrencyId()
 	{
 		return currencyByCurrencyId;
 	}
