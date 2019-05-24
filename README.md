@@ -1,7 +1,8 @@
 Stock Portfolio
 ===============
 
-[![Build Status](https://travis-ci.com/lavinj87/stock-portfolio.svg?token=V6sBzqxR9xgRNA3FpMco&branch=develop)](https://travis-ci.com/lavinj87/stock-portfolio)
+[![Build Status](https://travis-ci.com/lavinj87/stock-portfolio.svg?token=V6sBzqxR9xgRNA3FpMco&branch=develop)](https://travis-ci.com/lavinj87/stock-portfolio) [![codecov](https://codecov.io/gh/lavinj87/stock-portfolio/branch/develop/graph/badge.svg)](https://codecov.io/gh/lavinj87/stock-portfolio)
+
 
 This project let's you define a `Portfolio` consisting on `Stocks`.
 

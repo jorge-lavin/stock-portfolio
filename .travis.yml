@@ -1,15 +1,23 @@
+# Using java 8
 language: java
 
-# use Java 8
 jdk:
 - oraclejdk8
 
 # see https://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure
 sudo: false
 
+# We dont need the whole history
 git:
   depth: 3
 
+# cache the build tool's caches
+cache:
+  directories:
+   - $HOME/.m2
+   - $HOME/.gradle
+
+# We need to install manually gradle 5.3 to use the spring plugins
 before_install:
   - cd rest-api 
   - wget http://services.gradle.org/distributions/gradle-5.3-bin.zip
@@ -18,8 +26,6 @@ before_install:
   - export PATH=$GRADLE_HOME/bin:$PATH
   - gradle -v
 
-# cache the build tool's caches
-cache:
-  directories:
-   - $HOME/.m2
-   - $HOME/.gradle
+# Jacoco report
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
