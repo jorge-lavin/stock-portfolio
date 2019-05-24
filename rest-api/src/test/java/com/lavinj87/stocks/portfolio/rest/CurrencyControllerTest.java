@@ -28,7 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = CurrencyController.class)
 public class CurrencyControllerTest
 {
-
     @Autowired
     private MockMvc mockMvc;
 
