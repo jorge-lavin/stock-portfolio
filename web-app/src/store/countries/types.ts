@@ -14,6 +14,7 @@ export enum CountriesActionTypes {
 }
 
 export interface CountriesState {
+  lastFetched: Date,
   readonly loading: boolean,
   readonly entities: NormalizedState<Country>,
   readonly errors?: string

@@ -3,6 +3,7 @@ import { CountriesState, CountriesActionTypes, Country } from './types'
 
 // Type-safe initialState!
 const initialState: CountriesState = {
+  lastFetched: new Date(0),
   entities: {
     allIds: [],
     byId: {}
@@ -26,7 +27,7 @@ const reducer: Reducer<CountriesState> = (state = initialState, action) => {
       }, {});
       action.payload.map((c:Country) => ({ [c.countryId] : {...c } }))
 
-      return { ...state, loading: false, entities: { allIds, byId } }
+      return { ...state, loading: false, entities: { allIds, byId }, lastFetched: new Date() }
     
     case CountriesActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload }

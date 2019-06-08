@@ -8,15 +8,31 @@ import countriesSaga from './countries/sagas'
 import { countriesReducer } from './countries/reducer'
 import { CountriesState } from './countries/types'
 
+import currenciesSaga from './currencies/sagas'
+import { currenciesReducer } from './currencies/reducer'
+import { CurrenciesState } from './currencies/types'
+
+import dividendsSaga from './dividends/sagas'
+import { dividendsReducer } from './dividends/reducer'
+import { DividendsState } from './dividends/types'
+
+import sectorsSaga from './sectors/sagas'
+import { sectorsReducer } from './sectors/reducer'
+import { SectorsState } from './sectors/types'
+
 import stocksSaga from './stocks/sagas'
 import { stocksReducer } from './stocks/reducer'
 import { StocksState } from './stocks/types'
 
 
 
+
 // The top-level state object
 export interface ApplicationState {
   countries: CountriesState
+  currencies: CurrenciesState
+  dividends: DividendsState
+  sectors: SectorsState
   stocks: StocksState
   router: RouterState
 }
@@ -32,6 +48,9 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 export const createRootReducer = (history: History) =>
   combineReducers({
     countries: countriesReducer,
+    currencies: currenciesReducer,
+    dividends: dividendsReducer,
+    sectors: sectorsReducer,
     stocks: stocksReducer,
     router: connectRouter(history)
   })
@@ -41,6 +60,6 @@ export const createRootReducer = (history: History) =>
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
 export function* rootSaga() {
   yield all(
-    [fork(stocksSaga), fork(countriesSaga)]
+    [fork(countriesSaga), fork(currenciesSaga), fork(dividendsSaga), fork(sectorsSaga), fork(stocksSaga)]
   )
 }

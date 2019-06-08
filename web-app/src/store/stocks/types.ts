@@ -15,6 +15,7 @@ export enum StocksActionTypes {
 }
 
 export interface StocksState {
+  lastFetched: Date,
   readonly loading: boolean,
   readonly entities: NormalizedState<Stock>,
   readonly errors?: string

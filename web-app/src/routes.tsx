@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound'
 import IndexPage from './pages/index'
 //import PortfoliosPage from './pages/portfolios'
 import StocksPage from './pages/stocks'
-//import DividendsPage from './pages/dividends'
+import DividendsPage from './pages/dividends'
 
 // If your app is big + you have routes with a lot of components, you should consider
 // code-splitting your routes! If you bundle stuff up with Webpack, I recommend `react-loadable`.
@@ -25,7 +25,7 @@ const Routes: React.SFC = () => (
       <Route exact path="/" component={IndexPage} />
       {/** <Route path="/portfolio" component={PortfoliosPage} />*/}
       <Route path="/stocks" component={StocksPage} />
-      {/** <Route path="/dividends" component={DividendsPage} />*/}
+      <Route path="/dividends" component={DividendsPage} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
