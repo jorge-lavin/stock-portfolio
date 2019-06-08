@@ -11,10 +11,10 @@ interface IState {
 }
 
 
-class Portfolio extends React.PureComponent<IProps, IState> {
+class Stocks extends React.PureComponent<IProps, IState> {
   readonly state = {
-    columns: ["Ticker", "Quantity", "Dividend"],
-    rows    : [ ["A", "100", "100"], ["B", "200", "200"]    ]
+    columns: ["Ticker", "Country", "Sector"],
+    rows    : [ ["A", "ES", "Foo"], ["B", "EN", "Bar"]    ]
   }
 
   public render() {           
@@ -35,4 +35,4 @@ class Portfolio extends React.PureComponent<IProps, IState> {
   }
 }
 
-export default Portfolio;
+export default Stocks;
