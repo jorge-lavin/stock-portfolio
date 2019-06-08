@@ -1,3 +1,4 @@
+import NormalizedState from '../NormalizedObjects'
 
 export interface Stock {
   stockId: string;
@@ -15,6 +16,6 @@ export enum StocksActionTypes {
 
 export interface StocksState {
   readonly loading: boolean,
-  readonly data: Stock[],
+  readonly entities: NormalizedState<Stock>,
   readonly errors?: string
 }

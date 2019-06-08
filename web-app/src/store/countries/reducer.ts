@@ -1,8 +1,8 @@
 import { Reducer } from 'redux'
-import { StocksState, StocksActionTypes, Stock } from './types'
+import { CountriesState, CountriesActionTypes, Country } from './types'
 
 // Type-safe initialState!
-const initialState: StocksState = {
+const initialState: CountriesState = {
   entities: {
     allIds: [],
     byId: {}
@@ -13,22 +13,22 @@ const initialState: StocksState = {
 
 // Thanks to Redux 4's much simpler typings, we can take away a lot of typings on the reducer side,
 // everything will remain type-safe.
-const reducer: Reducer<StocksState> = (state = initialState, action) => {
+const reducer: Reducer<CountriesState> = (state = initialState, action) => {
   switch (action.type) {
-    case StocksActionTypes.FETCH_REQUEST: {
+    case CountriesActionTypes.FETCH_REQUEST: {
       return { ...state, loading: true }
     }
-    case StocksActionTypes.FETCH_SUCCESS: 
-      const allIds = action.payload.map((s:Stock) => s.stockId)
-      const byId = action.payload.reduce((acc: any, stock:Stock) => {
-        acc[stock.stockId] = stock
+    case CountriesActionTypes.FETCH_SUCCESS: 
+      const allIds = action.payload.map((c:Country) => c.countryId)
+      const byId = action.payload.reduce((acc: any, country:Country) => {
+        acc[country.countryId] = country
         return acc
       }, {});
-      action.payload.map((s:Stock) => ({ [s.stockId] : {...s } }))
+      action.payload.map((c:Country) => ({ [c.countryId] : {...c } }))
 
       return { ...state, loading: false, entities: { allIds, byId } }
     
-    case StocksActionTypes.FETCH_ERROR: {
+    case CountriesActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload }
     }
     default: {
@@ -39,4 +39,4 @@ const reducer: Reducer<StocksState> = (state = initialState, action) => {
 
 // Instead of using default export, we use named exports. That way we can group these exports
 // inside the `index.js` folder.
-export { reducer as stocksReducer }
+export { reducer as countriesReducer }

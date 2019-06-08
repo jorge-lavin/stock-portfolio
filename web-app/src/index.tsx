@@ -12,7 +12,6 @@ import configureStore from './configureStore'
 // We use hash history because this example is going to be hosted statically.
 // Normally you would use browser history.
 const history = createBrowserHistory()
-
 const initialState = window.initialReduxState
 
 const store = configureStore(history, initialState)

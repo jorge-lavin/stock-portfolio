@@ -4,12 +4,19 @@ import { all, fork } from 'redux-saga/effects'
 import { connectRouter, RouterState } from 'connected-react-router'
 import { History } from 'history'
 
+import countriesSaga from './countries/sagas'
+import { countriesReducer } from './countries/reducer'
+import { CountriesState } from './countries/types'
+
 import stocksSaga from './stocks/sagas'
 import { stocksReducer } from './stocks/reducer'
 import { StocksState } from './stocks/types'
 
+
+
 // The top-level state object
 export interface ApplicationState {
+  countries: CountriesState
   stocks: StocksState
   router: RouterState
 }
@@ -24,6 +31,7 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 // the reducer acts on the corresponding ApplicationState property type.
 export const createRootReducer = (history: History) =>
   combineReducers({
+    countries: countriesReducer,
     stocks: stocksReducer,
     router: connectRouter(history)
   })
@@ -32,5 +40,7 @@ export const createRootReducer = (history: History) =>
 // "generator function", which you can read about here:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
 export function* rootSaga() {
-  yield all([fork(stocksSaga)])
+  yield all(
+    [fork(stocksSaga), fork(countriesSaga)]
+  )
 }

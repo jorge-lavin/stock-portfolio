@@ -4,45 +4,60 @@ import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table'
 
+
+import NormalizedObjects from '../../store/NormalizedObjects'
 import { ApplicationState, ConnectedReduxProps } from '../../store'
 import { Stock } from '../../store/stocks/types'
-import { fetchRequest } from '../../store/stocks/actions'
+import { Country } from '../../store/countries/types'
+import { fetchRequest as stocksFetchRequest } from '../../store/stocks/actions'
+import { fetchRequest as countriesFetchRequest } from '../../store/countries/actions'
+
 
 // Separate state props + dispatch props to their own interfaces.
 interface PropsFromState {
   loading: boolean
-  data: Stock[]
+  countries: NormalizedObjects<Country>
+  stocks: NormalizedObjects<Stock>
   errors?: string
 }
 
 // We can use `typeof` here to map our dispatch types to the props, like so.
 interface PropsFromDispatch {
-  fetchRequest: typeof fetchRequest
+  countriesFetchRequest: typeof countriesFetchRequest
+  stocksFetchRequest: typeof stocksFetchRequest
 }
 
 // Combine both state + dispatch props - as well as any props we want to pass - in a union type.
 type AllProps = PropsFromState & PropsFromDispatch & ConnectedReduxProps
 
-class HeroesIndexPage extends React.Component<AllProps> {
+
+class StocksIndexPage extends React.Component<AllProps> {  
   public componentDidMount() {
-    this.props.fetchRequest()
+    this.props.countriesFetchRequest()
+    this.props.stocksFetchRequest()
   }
 
   public render() {
-    const stocks = this.props.data
-    const columns = ["Ticker", "CountryId", "SectorId"]
+    const { stocks, countries } = this.props
     return (
       <Container>
-        <Table striped bordered hover>
+        <Table>
           <thead>
-            <tr>
-              {columns.map( (col, index) => <th key={index}>{col}</th>)}
-            </tr>
+           <tr><th>Ticker</th><th>Country</th><th>Sector</th></tr>
           </thead>
           <tbody>
-            { stocks == null ? "" : stocks.map( stock => <tr key={stock.stockId}><td>{stock.stockId}</td><td>{stock.countryId}</td><td>{stock.sectorId}</td></tr> ) }
+            { stocks.allIds.map ((stockId, index) => { 
+              const stock = stocks.byId[stockId]
+              return (
+                <tr key={index}>
+                  <td>{stock.stockId}</td>
+                  <td>{countries.byId[stock.countryId].name}</td>
+                  <td>{stock.sectorId}</td>
+                </tr> )
+              }) 
+            }
           </tbody>
-        </Table>      
+        </Table>
       </Container>
     )
   }
@@ -51,16 +66,18 @@ class HeroesIndexPage extends React.Component<AllProps> {
 // It's usually good practice to only include one context at a time in a connected component.
 // Although if necessary, you can always include multiple contexts. Just make sure to
 // separate them from each other to prevent prop conflicts.
-const mapStateToProps = ({ stocks }: ApplicationState) => ({
-  loading: stocks.loading,
-  errors: stocks.errors,
-  data: stocks.data
+const mapStateToProps = ({ stocks, countries }: ApplicationState) => ({
+  loading: stocks.loading || countries.loading,
+  errors: stocks.errors || countries.errors,
+  countries: countries.entities,
+  stocks: stocks.entities
 })
 
 // mapDispatchToProps is especially useful for constraining our actions to the connected component.
 // You can access these via `this.props`.
 const mapDispatchToProps = {
-  fetchRequest
+  countriesFetchRequest, 
+  stocksFetchRequest
 }
 
 // Now let's connect our component!
@@ -68,4 +85,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HeroesIndexPage)
+)(StocksIndexPage)

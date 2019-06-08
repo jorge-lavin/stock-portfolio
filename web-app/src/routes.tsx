@@ -1,6 +1,9 @@
 import * as React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
+
+import Header from './components/layouts/Header'
+import NotFound from './pages/NotFound'
 import IndexPage from './pages/index'
 //import PortfoliosPage from './pages/portfolios'
 import StocksPage from './pages/stocks'
@@ -17,13 +20,14 @@ import StocksPage from './pages/stocks'
 
 const Routes: React.SFC = () => (
   <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={IndexPage} />
-        {/** <Route path="/portfolio" component={PortfoliosPage} />*/}
-        <Route path="/stocks" component={StocksPage} />
-        {/** <Route path="/dividends" component={DividendsPage} />*/}
-        <Route component={() => <div>Not Found</div>} />
-      </Switch>
+    <Header/>
+    <Switch>
+      <Route exact path="/" component={IndexPage} />
+      {/** <Route path="/portfolio" component={PortfoliosPage} />*/}
+      <Route path="/stocks" component={StocksPage} />
+      {/** <Route path="/dividends" component={DividendsPage} />*/}
+      <Route component={NotFound} />
+    </Switch>
   </BrowserRouter>
 )
 
