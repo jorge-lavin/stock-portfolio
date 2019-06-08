@@ -107,7 +107,9 @@ public class Dividend
 		this.stockByStockId = stockByStockId;
 	}
 
-	@ManyToOne @JoinColumn(name = "CurrencyId", referencedColumnName = "CurrencyId", nullable = false,  insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "CurrencyId", referencedColumnName = "CurrencyId", nullable = false,  insertable = false, updatable = false)
+	@JsonIgnore
 	public Currency getCurrencyByCurrencyId()
 	{
 		return currencyByCurrencyId;

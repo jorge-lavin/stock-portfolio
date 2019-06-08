@@ -70,7 +70,9 @@ import java.util.Objects;
 		return Objects.hash(stockId, sectorId, countryId);
 	}
 
-	@OneToMany(mappedBy = "stockByStockId") public Collection<Dividend> getDividendsByStockId()
+	@OneToMany(mappedBy = "stockByStockId")
+	@JsonIgnore
+	public Collection<Dividend> getDividendsByStockId()
 	{
 		return dividendsByStockId;
 	}
@@ -80,7 +82,10 @@ import java.util.Objects;
 		this.dividendsByStockId = dividendsByStockId;
 	}
 
-	@ManyToOne @JoinColumn(name = "SectorId", referencedColumnName = "SectorId", nullable = false,  insertable = false, updatable = false) public Sector getSectorBySectorId()
+	@ManyToOne
+	@JoinColumn(name = "SectorId", referencedColumnName = "SectorId", nullable = false,  insertable = false, updatable = false)
+	@JsonIgnore
+	public Sector getSectorBySectorId()
 	{
 		return sectorBySectorId;
 	}
@@ -90,7 +95,10 @@ import java.util.Objects;
 		this.sectorBySectorId = sectorBySectorId;
 	}
 
-	@ManyToOne @JoinColumn(name = "CountryId", referencedColumnName = "CountryId", nullable = false,  insertable = false, updatable = false) public Country getCountryByCountryId()
+	@ManyToOne
+	@JoinColumn(name = "CountryId", referencedColumnName = "CountryId", nullable = false,  insertable = false, updatable = false)
+	@JsonIgnore
+	public Country getCountryByCountryId()
 	{
 		return countryByCountryId;
 	}

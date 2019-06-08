@@ -23,11 +23,11 @@ class Dividends extends React.PureComponent<IProps, IState> {
         <Table striped bordered hover>
           <thead>
             <tr>
-              {this.state.columns.map( col => <th>{col}</th>)}
+              {this.state.columns.map( (col, index) => <th key={index}>{col}</th>)}
             </tr>
           </thead>
           <tbody>
-            {this.state.rows.map(row => <tr>{row.map(cell => <td>{cell}</td>)}</tr>)}
+            {this.state.rows.map((row, index) => <tr key={index}>{row.map( (cell, index) => <td key={index}>{cell}</td>)}</tr>)}
           </tbody>
         </Table>      
       </Container>
