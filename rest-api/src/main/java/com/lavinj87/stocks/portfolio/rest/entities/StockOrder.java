@@ -22,7 +22,9 @@ import java.util.Objects;
 		this.orderDate = orderDate;
 	}
 
-	@Id @Column(name = "PortfolioId", nullable = false) public int getPortfolioId()
+	@Id
+	@Column(name = "PortfolioId", nullable = false)
+	public int getPortfolioId()
 	{
 		return portfolioId;
 	}
@@ -32,7 +34,9 @@ import java.util.Objects;
 		this.portfolioId = portfolioId;
 	}
 
-	@Id @Column(name = "StockId", nullable = false, length = 16) public String getStockId()
+	@Id
+	@Column(name = "StockId", nullable = false, length = 16)
+	public String getStockId()
 	{
 		return stockId;
 	}
@@ -92,7 +96,9 @@ import java.util.Objects;
 		this.portfolioByPortfolioId = portfolioByPortfolioId;
 	}
 
-	@ManyToOne @JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "StockId", referencedColumnName = "StockId", nullable = false,  insertable = false, updatable = false)
+	@JsonIgnore
 	public Stock getStockByStockId()
 	{
 		return stockByStockId;

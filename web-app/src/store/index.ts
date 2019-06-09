@@ -16,6 +16,10 @@ import dividendsSaga from './dividends/sagas'
 import { dividendsReducer } from './dividends/reducer'
 import { DividendsState } from './dividends/types'
 
+import portfoliosSaga from './portfolios/sagas'
+import { portfoliosReducer } from './portfolios/reducer'
+import { PortfoliosState } from './portfolios/types'
+
 import sectorsSaga from './sectors/sagas'
 import { sectorsReducer } from './sectors/reducer'
 import { SectorsState } from './sectors/types'
@@ -26,12 +30,12 @@ import { StocksState } from './stocks/types'
 
 
 
-
 // The top-level state object
 export interface ApplicationState {
   countries: CountriesState
   currencies: CurrenciesState
   dividends: DividendsState
+  portfolios: PortfoliosState
   sectors: SectorsState
   stocks: StocksState
   router: RouterState
@@ -50,6 +54,7 @@ export const createRootReducer = (history: History) =>
     countries: countriesReducer,
     currencies: currenciesReducer,
     dividends: dividendsReducer,
+    portfolios: portfoliosReducer,
     sectors: sectorsReducer,
     stocks: stocksReducer,
     router: connectRouter(history)
@@ -60,6 +65,9 @@ export const createRootReducer = (history: History) =>
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
 export function* rootSaga() {
   yield all(
-    [fork(countriesSaga), fork(currenciesSaga), fork(dividendsSaga), fork(sectorsSaga), fork(stocksSaga)]
+    [
+      fork(countriesSaga), fork(currenciesSaga), fork(dividendsSaga), 
+      fork(portfoliosSaga), fork(sectorsSaga), fork(stocksSaga)
+    ]
   )
 }

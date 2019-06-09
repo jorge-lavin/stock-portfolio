@@ -9,24 +9,27 @@ class Header extends React.Component {
   public render() {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">Portfolio Manager</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <LinkContainer to="/portfolios">
-              <Nav.Link>Portfolios</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/stocks">
-              <Nav.Link>Stocks</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to ="/dividends">
-              <Nav.Link>Dividends</Nav.Link>
-            </LinkContainer>
+            {buildLinkContainer("/countries", "Countries")}
+            {buildLinkContainer("/currencies", "Currencies")}
+            {buildLinkContainer("/dividends", "Dividends")}
+            {buildLinkContainer("/portfolios", "Portfolios")}
+            {buildLinkContainer("/sectors", "Sectors")}
+            {buildLinkContainer("/stocks", "Stocks")}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     )
   }
+}
+
+const buildLinkContainer = (to: string, linkName: string) => {
+  return <LinkContainer to={to}>
+    <Nav.Link>{linkName}</Nav.Link>
+  </LinkContainer>
 }
 
 export default Header

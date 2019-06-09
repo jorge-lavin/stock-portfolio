@@ -47,6 +47,7 @@ public class PortfolioController {
 
 	@PostMapping("/{portfolioId}")
 	public Portfolio savePortfolio(@PathVariable int portfolioId, @RequestBody Portfolio portfolio) {
+		portfolio.setPortfolioId(portfolioId);
 		return portfolioRepository.save(portfolio);
 	}
 
@@ -57,9 +58,6 @@ public class PortfolioController {
 
 	@PostMapping("/{portfolioId}/stocks/{stockId}/")
 	public StockOrder addOrder(@PathVariable int portfolioId, @PathVariable String stockId, @RequestBody StockOrder stockOrder) {
-		//Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find portfolio with id " + portfolioId));
-		//Stock stock = stockRepository.findById(stockId).orElseThrow(() ->  new ResponseStatusException(NOT_FOUND, "Unable to find stock with id " + stockId));
-
 		stockOrder.setStockId(stockId);
 		stockOrder.setPortfolioId(portfolioId);
 

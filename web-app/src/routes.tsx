@@ -5,9 +5,14 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './components/layouts/Header'
 import NotFound from './pages/NotFound'
 import IndexPage from './pages/index'
-//import PortfoliosPage from './pages/portfolios'
-import StocksPage from './pages/stocks'
-import DividendsPage from './pages/dividends'
+
+import Countries from './containers/Countries'
+import Currencies from './containers/Currencies'
+import Dividends from './containers/Dividends'
+import Portfolios from './containers/Portfolios'
+import Sectors from './containers/Sectors'
+import Stocks from './containers/Stocks'
+
 
 // If your app is big + you have routes with a lot of components, you should consider
 // code-splitting your routes! If you bundle stuff up with Webpack, I recommend `react-loadable`.
@@ -23,9 +28,12 @@ const Routes: React.SFC = () => (
     <Header/>
     <Switch>
       <Route exact path="/" component={IndexPage} />
-      {/** <Route path="/portfolio" component={PortfoliosPage} />*/}
-      <Route path="/stocks" component={StocksPage} />
-      <Route path="/dividends" component={DividendsPage} />
+      <Route path="/countries" component={Countries} />
+      <Route path="/currencies" component={Currencies} />
+      <Route path="/dividends" component={Dividends} />
+      <Route path="/portfolios" component={Portfolios} />
+      <Route path="/sectors" component={Sectors} />
+      <Route path="/stocks" component={Stocks} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

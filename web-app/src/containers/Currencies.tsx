@@ -4,58 +4,47 @@ import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table'
 
-import NormalizedObjects from '../../store/NormalizedObjects'
-import { ApplicationState, ConnectedReduxProps } from '../../store'
-
-import { Currency } from '../../store/currencies/types'
-import { Dividend } from '../../store/dividends/types'
-
-
-
-import { fetchRequest as currenciesFetchRequest } from '../../store/currencies/actions'
-import { fetchRequest as dividendsFetchRequest } from '../../store/dividends/actions'
+import NormalizedObjects from '../store/NormalizedObjects'
+import { ApplicationState, ConnectedReduxProps } from '../store'
+import { Currency } from '../store/currencies/types'
+import { fetchRequest as currenciesFetchRequest } from '../store/currencies/actions'
 
 // Separate state props + dispatch props to their own interfaces.
 interface PropsFromState {
   loading: boolean
   currencies: { entities: NormalizedObjects<Currency>, lastFetched: Date }
-  dividends: { entities: NormalizedObjects<Dividend>, lastFetched: Date }
   errors?: string
 }
 
 // We can use `typeof` here to map our dispatch types to the props, like so.
 interface PropsFromDispatch {
   currenciesFetchRequest: typeof currenciesFetchRequest
-  dividendsFetchRequest: typeof dividendsFetchRequest
 }
 
 // Combine both state + dispatch props - as well as any props we want to pass - in a union type.
 type AllProps = PropsFromState & PropsFromDispatch & ConnectedReduxProps
 
 
-class DividendsIndexPage extends React.Component<AllProps> {  
+class CurrenciesContainer extends React.Component<AllProps> {  
   public componentDidMount() {
       this.props.currenciesFetchRequest()
-      this.props.dividendsFetchRequest()
   }
 
   public render() {
-    const { currencies, dividends, loading } = this.props
-    const renderCurrency = (amount: number, currencyId: string) => `${amount} ${currencyId}`
+    const { currencies, loading } = this.props
     return (
       <Container>
         <Table>
           <thead>
-            <tr><th>Ticker</th><th>Period</th><th>Amount</th></tr>
+            <tr><th>CurrencyId</th><th>Name</th></tr>
           </thead>
           <tbody>
-            { loading ? null : dividends.entities.allIds.map((dividendId, index) => { 
-              const dividend = dividends.entities.byId[dividendId]
+            { loading ? null : currencies.entities.allIds.map((currencyId, index) => { 
+              const currency = currencies.entities.byId[currencyId]
               return (
                 <tr key={index}>
-                  <td>{dividend.stockId}</td>
-                  <td>{dividend.period}</td>
-                  <td>{renderCurrency(dividend.amount, currencies.entities.byId[dividend.currencyId].currencyId)}</td>
+                  <td>{currency.currencyId}</td>
+                  <td>{currency.name}</td>
                 </tr> 
               )}) 
             }
@@ -80,7 +69,6 @@ const mapStateToProps = ({ currencies, dividends }: ApplicationState) => ({
 // You can access these via `this.props`.
 const mapDispatchToProps = {
   currenciesFetchRequest,
-  dividendsFetchRequest
 }
 
 // Now let's connect our component!
@@ -88,4 +76,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DividendsIndexPage)
+)(CurrenciesContainer)
