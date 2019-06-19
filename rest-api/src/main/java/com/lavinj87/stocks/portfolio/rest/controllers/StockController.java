@@ -5,6 +5,7 @@ import com.lavinj87.stocks.portfolio.rest.entities.Stock;
 import com.lavinj87.stocks.portfolio.rest.repositories.DividendRepository;
 import com.lavinj87.stocks.portfolio.rest.repositories.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,5 +57,11 @@ public class StockController
 	public Dividend addDividend(@PathVariable String stockId, @RequestBody Dividend dividend) {
 		dividend.setStockId(stockId);
 		return dividendRepository.save(dividend);
+	}
+
+	@GetMapping("/{stockId}/dividends/")
+	public List<Dividend> findDividendsByStockId(@PathVariable String stockId) {
+		Dividend dividend = new Dividend(stockId);
+		return dividendRepository.findAll(Example.of(dividend));
 	}
 }

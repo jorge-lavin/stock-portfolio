@@ -20,6 +20,11 @@ public class Dividend
 
 	private Dividend() {}
 
+	public Dividend(String stockId)
+	{
+		this.stockId = stockId;
+	}
+
 	public Dividend(Date date, short period, BigDecimal amount, String currencyId) {
 		this.date = date;
 		this.period = period;
