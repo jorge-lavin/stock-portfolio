@@ -10,7 +10,7 @@ import configureStore from './store/configureStore';
 import Home from './components/Home'
 import Portfolios from './components/Portfolios'
 import Stocks from './containers/Stocks'
-import Fundamentals from './components/Fundamentals'
+import Fundamentals from './containers/Fundamentals'
 
 const store = configureStore()
 

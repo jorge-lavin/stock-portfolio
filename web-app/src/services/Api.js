@@ -4,3 +4,9 @@ export async function fetchStocks()  {
   return data
 }
 
+export async function fetchDividends(stockId) {
+  const res = await fetch (`/api/v1/stocks/${stockId}/dividends/`)
+  const data = await res.json()
+  return data
+}
+
