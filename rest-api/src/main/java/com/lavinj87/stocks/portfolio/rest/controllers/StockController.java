@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -60,8 +61,7 @@ public class StockController
 	}
 
 	@GetMapping("/{stockId}/dividends/")
-	public List<Dividend> findDividendsByStockId(@PathVariable String stockId) {
-		Dividend dividend = new Dividend(stockId);
-		return dividendRepository.findAll(Example.of(dividend));
+	public Collection<Dividend> findDividendsByStockId(@PathVariable String stockId) {
+		return stockRepository.findById(stockId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find stock with id " + stockId)).getDividendsByStockId();
 	}
 }

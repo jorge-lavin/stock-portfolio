@@ -54,6 +54,11 @@ import java.util.Objects;
 		return Objects.hash(currencyId, name);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("<Currency currencyId:%s, name:%s>", currencyId, name);
+	}
+
 	@OneToMany(mappedBy = "currencyByCurrencyId")
 	@JsonIgnore
 	public Collection<Dividend> getDividendsByCurrencyId()

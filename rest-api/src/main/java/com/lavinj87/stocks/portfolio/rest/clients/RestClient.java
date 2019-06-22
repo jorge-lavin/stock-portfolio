@@ -1,4 +1,4 @@
-package com.lavinj87.stocks.portfolio.rest;
+package com.lavinj87.stocks.portfolio.rest.clients;
 
 import com.lavinj87.stocks.portfolio.rest.entities.Country;
 import com.lavinj87.stocks.portfolio.rest.entities.Currency;
@@ -25,7 +25,7 @@ public class RestClient {
 	}
 
 	public RestClient(String host, Integer port) {
-		this(String.format("http://%s:%d", host, port), new RestTemplate());
+		this(String.format("http://%s:%d/api/v1/", host, port), new RestTemplate());
 	}
 
 	public List<Country> findCountries() {
@@ -114,6 +114,10 @@ public class RestClient {
 
 	public Dividend addDividend(String stockId, Dividend dividend) {
 		return restTemplate.postForObject(composeUrl("stocks", stockId, "dividends"), dividend, Dividend.class);
+	}
+
+	public List<Dividend> findDividendsByStock(String stockId) {
+		return restTemplate.exchange(composeUrl("stocks", stockId, "dividends"), HttpMethod.GET, null, new ParameterizedTypeReference<List<Dividend>>(){}).getBody();
 	}
 
 	private String composeUrl(String... parts) {

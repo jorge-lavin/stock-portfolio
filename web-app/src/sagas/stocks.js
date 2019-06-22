@@ -9,7 +9,6 @@ function* fetchStocks() {
     const stocks = yield call(Api.fetchStocks)
     yield put(fetchStocksSuccess(stocks))
   } catch (e) {
-    console.log(e)
     yield put(fetchStocksFailure(e))
   }
 }

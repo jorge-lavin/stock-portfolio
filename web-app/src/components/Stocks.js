@@ -1,5 +1,6 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table'
+import { Link } from 'react-router-dom'
 
 const Stocks = ({error, stocks, loading}) => {
   return (
@@ -22,7 +23,7 @@ const Stocks = ({error, stocks, loading}) => {
                 <td>{stockId}</td>
                 <td>{stock.sectorId}</td>
                 <td>{stock.countryId}</td>
-                <td>Fundamentals</td>
+                <td><Link to={`/stocks/${stockId}/fundamentals/`}>Fundamentals</Link></td>
               </tr>
             )
           })

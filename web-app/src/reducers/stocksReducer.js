@@ -5,6 +5,7 @@ const stocksReducer = (state = initialState.stocks, action) => {
   switch (action.type) {
     case FETCH_STOCKS_REQUEST:
       return {...state, loading: true}
+
     case FETCH_STOCKS_SUCCESS:
       const newState = { ...state, loading: false }
       const stocks = action.payload
@@ -16,8 +17,10 @@ const stocksReducer = (state = initialState.stocks, action) => {
         newState.stocks.byId[stock.stockId] = stock
       });
       return newState
+
     case FETCH_STOCKS_FAILURE:
       return { ...state, loading: false, error: action.payload }
+      
     default:
       return state;
   }

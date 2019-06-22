@@ -55,6 +55,11 @@ import java.util.Objects;
 		return Objects.hash(sectorId, name);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("<Sector sectorId:%d, name:%s>", sectorId, name);
+	}
+
 	@OneToMany(mappedBy = "sectorBySectorId")
 	@JsonIgnore
 	public Collection<Stock> getStocksBySectorId()

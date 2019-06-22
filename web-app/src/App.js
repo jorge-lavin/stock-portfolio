@@ -10,6 +10,7 @@ import configureStore from './store/configureStore';
 import Home from './components/Home'
 import Portfolios from './components/Portfolios'
 import Stocks from './containers/Stocks'
+import Fundamentals from './components/Fundamentals'
 
 const store = configureStore()
 
@@ -30,6 +31,7 @@ const App = () =>
       <Route exact path="/" component={Home}/>        
       <Route exact path="/portfolios" component={Portfolios}/>
       <Route exact path="/stocks" component={Stocks}/>
+      <Route path="/stocks/:stockId/fundamentals" component={Fundamentals}/>
     </BrowserRouter>
   </Provider>
 

@@ -13,7 +13,7 @@ public class Dividend
 	private String stockId;
 	private Date date;
 	private short period;
-	private BigDecimal amount;
+	private Double amount;
 	private String currencyId;
 	private Stock stockByStockId;
 	private Currency currencyByCurrencyId;
@@ -25,7 +25,15 @@ public class Dividend
 		this.stockId = stockId;
 	}
 
-	public Dividend(Date date, short period, BigDecimal amount, String currencyId) {
+	public Dividend(Date date, short period, Double amount, String currencyId) {
+		this.date = date;
+		this.period = period;
+		this.amount	= amount;
+		this.currencyId = currencyId;
+	}
+
+	public Dividend(String stockId, Date date, short period, Double amount, String currencyId) {
+		this.stockId = stockId;
 		this.date = date;
 		this.period = period;
 		this.amount	= amount;
@@ -62,12 +70,12 @@ public class Dividend
 		this.period = period;
 	}
 
-	@Basic @Column(name = "Amount", nullable = false, precision = 4) public BigDecimal getAmount()
+	@Basic @Column(name = "Amount", nullable = false, precision = 4) public Double getAmount()
 	{
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount)
+	public void setAmount(Double amount)
 	{
 		this.amount = amount;
 	}
@@ -97,6 +105,11 @@ public class Dividend
 	@Override public int hashCode()
 	{
 		return Objects.hash(stockId, date, period, amount, currencyId);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Dividend stockId:%s, date:%s, period:%d, amount:%f", stockId, date, period, amount);
 	}
 
 	@ManyToOne

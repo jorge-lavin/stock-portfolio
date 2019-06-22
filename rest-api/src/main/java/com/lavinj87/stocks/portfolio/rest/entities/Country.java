@@ -59,6 +59,11 @@ public class Country
 		return Objects.hash(countryId, name);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("<Country countryId:%s, name:%s>", countryId, name);
+	}
+
 	@OneToMany(mappedBy = "countryByCountryId")
 	@JsonIgnore
 	public Collection<Stock> getStocksByCountryId()

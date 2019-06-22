@@ -70,6 +70,11 @@ import java.util.Objects;
 		return Objects.hash(stockId, sectorId, countryId);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("<Stock %s>", stockId);
+	}
+
 	@OneToMany(mappedBy = "stockByStockId")
 	@JsonIgnore
 	public Collection<Dividend> getDividendsByStockId()
